@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สรุปเคมีทั่วไป 1102 104</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark: #0d1b4b;
+    --blue-mid: #1a3a8f;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --green-dark: #14532d;
+    --green: #15803d;
+    --green-light: #dcfce7;
+    --red-dark: #7f1d1d;
+    --red: #b91c1c;
+    --red-light: #fee2e2;
+    --orange: #c2410c;
+    --orange-light: #ffedd5;
+    --purple: #6b21a8;
+    --purple-light: #f3e8ff;
+    --yellow-light: #fefce8;
+    --gray: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --formula-bg: #eff6ff;
+    --formula-border: #93c5fd;
+    --code: #1e40af;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, #1e3a8a 60%, #1e40af 100%);
+    color: white;
+    padding: 40px 30px 30px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -40px; left: 40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #bfdbfe;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .hero .subtitle {
+    color: #93c5fd;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .hero-chips {
+    display: flex; flex-wrap: wrap; gap: 8px; position: relative; z-index: 1;
+  }
+  .chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  /* NAV */
+  .toc {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .toc h3 { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .toc a {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .toc a:hover { background: var(--blue-light); }
+  .toc a .num { color: var(--text-muted); font-size: 11px; font-weight: 600; min-width: 20px; }
+
+  /* SECTION */
+  .part-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 24px;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+  }
+  .part-header.blue { background: linear-gradient(135deg, var(--blue-dark), var(--blue-mid)); color: white; }
+  .part-header.green { background: linear-gradient(135deg, var(--green-dark), var(--green)); color: white; }
+  .part-header.red { background: linear-gradient(135deg, var(--red-dark), var(--red)); color: white; }
+  .part-header .icon { font-size: 28px; opacity: 0.9; }
+  .part-header h2 { font-size: 20px; font-weight: 700; }
+  .part-header p { font-size: 13px; opacity: 0.8; margin-top: 2px; }
+
+  .part-body {
+    background: white;
+    border-radius: 0 0 12px 12px;
+    border: 1px solid var(--border);
+    border-top: none;
+    padding: 28px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .section { margin-bottom: 32px; }
+  .section:last-child { margin-bottom: 0; }
+
+  h3.sh {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--blue-mid);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--blue-light);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  h3.sh .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+  }
+  h3.sh.green-sh { color: var(--green-dark); border-color: var(--green-light); }
+  h3.sh.green-sh .dot { background: var(--green); }
+  h3.sh.red-sh { color: var(--red-dark); border-color: var(--red-light); }
+  h3.sh.red-sh .dot { background: var(--red); }
+
+  h4.subh {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 14px 0 8px;
+  }
+  p { margin-bottom: 10px; }
+
+  /* TABLE */
+  .t-wrap { overflow-x: auto; margin: 14px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead tr { background: var(--blue-mid); color: white; }
+  thead.green-h tr { background: var(--green); }
+  thead.red-h tr { background: var(--red); }
+  thead.purple-h tr { background: var(--purple); }
+  thead.orange-h tr { background: var(--orange); }
+  th { padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--gray); }
+  tr:last-child td { border-bottom: none; }
+
+  /* FORMULA BOX */
+  .formula {
+    background: var(--formula-bg);
+    border: 1.5px solid var(--formula-border);
+    border-left: 4px solid var(--blue);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+    color: var(--code);
+    line-height: 1.9;
+  }
+  .formula.green-f {
+    background: var(--green-light);
+    border-color: #86efac;
+    border-left-color: var(--green);
+    color: var(--green-dark);
+  }
+  .formula.orange-f {
+    background: var(--orange-light);
+    border-color: #fdba74;
+    border-left-color: var(--orange);
+    color: var(--orange);
+  }
+
+  /* EXAMPLE */
+  .example {
+    background: var(--yellow-light);
+    border: 1px solid #fde68a;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .example .ex-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #92400e;
+    margin-bottom: 8px;
+  }
+  .example .ex-step {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: #451a03;
+    line-height: 1.9;
+    background: rgba(255,255,255,0.6);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 8px;
+  }
+
+  /* NOTE */
+  .note {
+    background: #fff7ed;
+    border-left: 4px solid #f97316;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13.5px;
+    color: #7c2d12;
+  }
+
+  /* GRID CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 14px 0; }
+  .card {
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid var(--border);
+  }
+  .card.blue-c { background: var(--blue-light); border-color: #bfdbfe; }
+  .card.green-c { background: var(--green-light); border-color: #bbf7d0; }
+  .card.red-c { background: var(--red-light); border-color: #fecaca; }
+  .card.purple-c { background: var(--purple-light); border-color: #e9d5ff; }
+  .card .card-title { font-weight: 700; font-size: 13.5px; margin-bottom: 6px; }
+  .card .card-title.blue { color: var(--blue-mid); }
+  .card .card-title.green { color: var(--green-dark); }
+  .card .card-title.red { color: var(--red-dark); }
+  .card .card-title.purple { color: var(--purple); }
+  .card p { font-size: 12.5px; margin: 0; }
+
+  /* ICE TABLE */
+  .ice-table table { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+  .ice-table thead tr { background: #334155; }
+  .ice-table td:first-child { font-weight: 600; color: var(--text-muted); }
+
+  /* SUMMARY */
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .sum-item {
+    background: var(--gray);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .sum-item .sum-key { font-weight: 700; font-size: 13px; color: var(--blue-mid); margin-bottom: 4px; }
+  .sum-item .sum-val { font-size: 12.5px; color: var(--text); }
+
+  /* REACTION CARDS */
+  .rxn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .rxn-card {
+    border-radius: 10px;
+    padding: 14px;
+    border: 2px solid var(--border);
+  }
+  .rxn-card .rxn-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .rxn-card .badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600;
+  }
+  .rxn-card p { font-size: 13px; }
+  .rxn-card .formula { margin: 8px 0; font-size: 12px; padding: 8px 12px; }
+
+  /* PH SCALE */
+  .ph-scale {
+    display: flex; border-radius: 8px; overflow: hidden; height: 36px; margin: 12px 0;
+  }
+  .ph-seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: white; }
+
+  @media (max-width: 600px) {
+    .toc-grid { grid-template-columns: 1fr; }
+    .rxn-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 24px; }
+  }
+  @media print {
+    body { background: white; }
+    .container { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">1102 104 เคมีทั่วไป</div>
+  <h1>สรุปเนื้อหาครบทุกบท</h1>
+  <p class="subtitle">General Chemistry · ครอบคลุมทุกหัวข้อพร้อมตัวอย่างและสูตรสำคัญ</p>
+  <div class="hero-chips">
+    <span class="chip">⚗️ กรด-เบส & สมดุล</span>
+    <span class="chip">⚡ ไฟฟ้าเคมี</span>
+    <span class="chip">🧬 เคมีอินทรีย์</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>📋 สารบัญ</h3>
+  <div class="toc-grid">
+    <a href="#acid-def"><span class="num">1.1</span>นิยามกรด-เบส</a>
+    <a href="#ph"><span class="num">1.2</span>pH, pOH และการคำนวณ</a>
+    <a href="#strength"><span class="num">1.3</span>ความแรงกรด-เบส</a>
+    <a href="#hydrolysis"><span class="num">1.4</span>ไฮโดรไลซิสของเกลือ</a>
+    <a href="#buffer"><span class="num">1.5</span>สารละลายบัฟเฟอร์</a>
+    <a href="#indicator"><span class="num">1.6</span>อินดิเคเตอร์</a>
+    <a href="#titration"><span class="num">1.7</span>การไทเทรต</a>
+    <a href="#electrochemistry"><span class="num">2</span>ไฟฟ้าเคมี</a>
+    <a href="#organic"><span class="num">3</span>เคมีอินทรีย์</a>
+    <a href="#reactions"><span class="num">3.5</span>ปฏิกิริยาสารอินทรีย์</a>
+  </div>
+</div>
+
+<!-- =================== PART 1 =================== -->
+<div class="part-header blue" id="acid-def">
+  <div class="icon">⚗️</div>
+  <div>
+    <h2>ส่วนที่ 1: กรด-เบส และสมดุลกรด-เบส</h2>
+    <p>Acid-Base & Equilibrium</p>
+  </div>
+</div>
+<div class="part-body">
+
+  <!-- 1.1 นิยาม -->
+  <div class="section">
+    <h3 class="sh"><span class="dot"></span>1.1 นิยามของกรดและเบส</h3>
+    <p>กรด = รสเปรี้ยว (น้ำส้มสายชู, มะนาว) &nbsp;|&nbsp; เบส = รสขม ลื่น (ยาลดกรด, NaOH)</p>
+
+    <div class="t-wrap">
+    <table>
+      <thead><tr><th>ทฤษฎี</th><th>กรด (Acid)</th><th>เบส (Base)</th><th>ข้อจำกัด</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Arrhenius</strong><br><span style="color:var(--text-muted);font-size:12px">1884 | Nobel Prize 1903</span></td>
+          <td>ให้ H⁺ ในน้ำ<br>เช่น HCl → H⁺ + Cl⁻</td>
+          <td>ให้ OH⁻ ในน้ำ<br>เช่น NaOH → Na⁺ + OH⁻</td>
+          <td>ใช้ได้เฉพาะในน้ำ ไม่อธิบาย NH₃ ได้</td>
+        </tr>
+        <tr>
+          <td><strong>Brønsted-Lowry</strong><br><span style="color:var(--text-muted);font-size:12px">1923</span></td>
+          <td>ผู้ให้โปรตอน H⁺<br>(Proton donor)</td>
+          <td>ผู้รับโปรตอน H⁺<br>(Proton acceptor)</td>
+          <td>กว้างกว่า ไม่จำกัดตัวทำละลาย</td>
+        </tr>
+        <tr>
+          <td><strong>Lewis</strong></td>
+          <td>รับคู่อิเล็กตรอน<br>(e⁻ acceptor)</td>
+          <td>ให้คู่อิเล็กตรอน<br>(e⁻ donor)</td>
+          <td>กว้างที่สุด รวม BF₃, AlCl₃</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4 class="subh">คู่กรด-เบส Conjugate (Brønsted-Lowry)</h4>
+    <div class="note">💡 คู่กรด-เบส ต่างกันที่ H⁺ <strong>จำนวน 1 ตัว</strong> เสมอ</div>
+    <div class="t-wrap">
+    <table>
+      <thead><tr><th>ปฏิกิริยา</th><th>กรด₁</th><th>เบส₂</th><th>คู่เบส₁</th><th>คู่กรด₂</th></tr></thead>
+      <tbody>
+        <tr><td>Rxn 1</td><td>HF</td><td>H₂O</td><td>F⁻</td><td>H₃O⁺</td></tr>
+        <tr><td>Rxn 2</td><td>HCOOH</td><td>CN⁻</td><td>HCOO⁻</td><td>HCN</td></tr>
+        <tr><td>Rxn 3</td><td>NH₄⁺</td><td>CO₃²⁻</td><td>NH₃</td><td>HCO₃⁻</td></tr>
+        <tr><td>Rxn 4</td><td>H₂PO₄⁻</td><td>OH⁻</td><td>HPO₄²⁻</td><td>H₂O</td></tr>
+        <tr><td>Rxn 5</td><td>H₂SO₄</td><td>N₂H₅⁺</td><td>HSO₄⁻</td><td>N₂H₆²⁺</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 1.2 pH -->
+  <div class="section" id="ph">
+    <h3 class="sh"><span class="dot"></span>1.2 pH, pOH และการคำนวณ</h3>
+
+    <div class="formula">
+pH = −log[H⁺]  &nbsp;&nbsp;|&nbsp;&nbsp;  pOH = −log[OH⁻]  &nbsp;&nbsp;|&nbsp;&nbsp;  <strong>pH + pOH = 14</strong> (ที่ 25°C)
+Kw = [H₃O⁺][OH⁻] = 10⁻¹⁴  &nbsp;&nbsp;|&nbsp;&nbsp;  [H⁺] = 10⁻ᵖᴴ  &nbsp;&nbsp;|&nbsp;&nbsp;  [OH⁻] = 10⁻ᵖᴼᴴ
+    </div>
+
+    <div class="ph-scale">
+      <div class="ph-seg" style="background:#d32f2f">1</div>
+      <div class="ph-seg" style="background:#e53935">2</div>
+      <div class="ph-seg" style="background:#f44336">3</div>
+      <div class="ph-seg" style="background:#ef9a9a;color:#7f1d1d">4</div>
+      <div class="ph-seg" style="background:#ffcdd2;color:#7f1d1d">5</div>
+      <div class="ph-seg" style="background:#ffebee;color:#888">6</div>
+      <div class="ph-seg" style="background:#e0e0e0;color:#444">7</div>
+      <div class="ph-seg" style="background:#e3f2fd;color:#1565c0">8</div>
+      <div class="ph-seg" style="background:#bbdefb;color:#1565c0">9</div>
+      <div class="ph-seg" style="background:#90caf9;color:#0d47a1">10</div>
+      <div class="ph-seg" style="background:#64b5f6;color:#0d47a1">11</div>
+      <div class="ph-seg" style="background:#42a5f5">12</div>
+      <div class="ph-seg" style="background:#1976d2">13</div>
+      <div class="ph-seg" style="background:#0d47a1">14</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-muted);margin-top:4px;margin-bottom:12px">
+      <span>กรดแก่</span><span style="color:#888">น้ำยอยในกระเพาะ | น้ำมะนาว | น้ำอัดลม | เลือด/ปัสสาวะ | น้ำทะเล | ยาลดกรด | แอมโมเนีย</span><span>เบสแก่</span>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่าง 1 — หา pH ของ CH₃COOH 1 M (Ka = 1.8×10⁻⁵)</div>
+      <p style="font-size:13px;margin:8px 0">ใช้ตาราง <strong>ICE</strong> (Initial – Change – Equilibrium):</p>
+      <div class="ex-step ice-table">
+<table>
+<thead><tr><th>CH₃COOH</th><th>⇌ H⁺</th><th>+ CH₃COO⁻</th></tr></thead>
+<tbody>
+<tr><td>I: 1 M</td><td>0</td><td>0</td></tr>
+<tr><td>C: −x</td><td>+x</td><td>+x</td></tr>
+<tr><td>E: (1−x) ≈ 1</td><td>x</td><td>x</td></tr>
+</tbody>
+</table>
+      </div>
+      <div class="ex-step" style="margin-top:8px">
+[C]/Ka = 1/(1.8×10⁻⁵) >> 1000  →  ใช้สมมติ 1−x ≈ 1
+Ka = x²/1 = 1.8×10⁻⁵  →  x = √(1.8×10⁻⁵) = 4.2×10⁻³ M = [H⁺]
+pH = −log(4.2×10⁻³) = <strong>2.38</strong>
+%การแตกตัว = (4.2×10⁻³ / 1) × 100 = <strong>0.42%</strong>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่าง 2 — หา pH ของ NH₃ 0.05 M (Kb = 1.8×10⁻⁵)</div>
+      <div class="ex-step">
+NH₃ + H₂O  ⇌  NH₄⁺ + OH⁻
+Kb = x²/0.05 = 1.8×10⁻⁵  →  x² = 9×10⁻⁷  →  x = 9.49×10⁻⁴ M = [OH⁻]
+pOH = −log(9.49×10⁻⁴) = 3.02
+pH = 14 − 3.02 = <strong>10.98</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.3 ความแรง -->
+  <div class="section" id="strength">
+    <h3 class="sh"><span class="dot"></span>1.3 ความแรงกรด-เบส (Ka, Kb)</h3>
+
+    <div class="card-grid">
+      <div class="card blue-c">
+        <div class="card-title blue">กรดแก่ — แตกตัว 100%</div>
+        <p>HCl, HBr, HI<br>HNO₃, H₂SO₄, HClO₄</p>
+      </div>
+      <div class="card red-c">
+        <div class="card-title red">กรดอ่อน — แตกตัวบางส่วน</div>
+        <p>CH₃COOH (Ka=1.8×10⁻⁵)<br>HF, H₂CO₃, H₃PO₄</p>
+      </div>
+      <div class="card green-c">
+        <div class="card-title green">เบสแก่ — แตกตัว 100%</div>
+        <p>NaOH, KOH<br>Ca(OH)₂, Ba(OH)₂<br>(โลหะหมู่ 1A, 2A)</p>
+      </div>
+      <div class="card purple-c">
+        <div class="card-title purple">เบสอ่อน — แตกตัวบางส่วน</div>
+        <p>NH₃ (Kb=1.8×10⁻⁵)<br>เอมีนต่างๆ (R-NH₂)</p>
+      </div>
+    </div>
+
+    <div class="formula">
+Ka × Kb = Kw = 10⁻¹⁴  (สำหรับคู่ conjugate กรด-เบส)
+Ka มาก = กรดแรง  |  Kb มาก = เบสแรง
+    </div>
+  </div>
+
+  <!-- 1.4 Hydrolysis -->
+  <div class="section" id="hydrolysis">
+    <h3 class="sh"><span class="dot"></span>1.4 คุณสมบัติกรด-เบสของเกลือ (Salt Hydrolysis)</h3>
+    <p style="font-size:13.5px;margin-bottom:12px">ไอออนของเกลือที่มาจากกรดอ่อนหรือเบสอ่อน จะทำปฏิกิริยากับน้ำ (Hydrolysis) ทำให้ pH เปลี่ยน</p>
+
+    <div class="t-wrap">
+    <table>
+      <thead class="green-h"><tr><th>ที่มาของเกลือ</th><th>ตัวอย่าง</th><th>pH</th><th>ปฏิกิริยา</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>กรดแก่ + เบสแก่</strong></td>
+          <td>NaCl, KNO₃, CaCl₂</td>
+          <td><span style="background:#e0e0e0;padding:2px 8px;border-radius:10px;font-size:12px">กลาง pH = 7</span></td>
+          <td>ไม่เกิด hydrolysis</td>
+        </tr>
+        <tr>
+          <td><strong>กรดแก่ + เบสอ่อน</strong></td>
+          <td>NH₄Cl, NH₄NO₃<br>AlCl₃, ZnCl₂</td>
+          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:10px;font-size:12px">กรด pH &lt; 7</span></td>
+          <td>NH₄⁺ + H₂O ⇌ NH₃ + H₃O⁺<br>Kh = Kw/Kb</td>
+        </tr>
+        <tr>
+          <td><strong>กรดอ่อน + เบสแก่</strong></td>
+          <td>CH₃COONa, NaF<br>Na₂CO₃</td>
+          <td><span style="background:#dbeafe;color:#1d4ed8;padding:2px 8px;border-radius:10px;font-size:12px">เบส pH &gt; 7</span></td>
+          <td>CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻<br>Kh = Kw/Ka</td>
+        </tr>
+        <tr>
+          <td><strong>กรดอ่อน + เบสอ่อน</strong></td>
+          <td>CH₃COONH₄</td>
+          <td>ขึ้นกับ Ka vs Kb</td>
+          <td>Ka &gt; Kb → กรด<br>Kb &gt; Ka → เบส<br>Ka ≈ Kb → กลาง</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="formula">
+%ไฮโดรไลซิส = (ความเข้มข้นที่แตกตัว / ความเข้มข้นเริ่มต้น) × 100
+    </div>
+  </div>
+
+  <!-- 1.5 Buffer -->
+  <div class="section" id="buffer">
+    <h3 class="sh"><span class="dot"></span>1.5 สารละลายบัฟเฟอร์ (Buffer Solution)</h3>
+    <p>สารละลายที่รักษา pH ให้คงที่ เมื่อเติมกรดหรือเบสเล็กน้อย หรือเจือจาง</p>
+    <p style="margin-top:6px;font-size:13.5px">ประกอบจาก: <strong>กรดอ่อน + เกลือของกรดอ่อน</strong> &nbsp;หรือ&nbsp; <strong>เบสอ่อน + เกลือของเบสอ่อน</strong></p>
+
+    <div class="card-grid" style="margin-top:12px">
+      <div class="card blue-c">
+        <div class="card-title blue">บัฟเฟอร์กรด (pH &lt; 7)</div>
+        <p>CH₃COOH / CH₃COO⁻<br>HF / F⁻</p>
+        <p style="margin-top:6px;font-size:12px;color:var(--blue-mid)">ตัวอย่าง: CH₃COOH/CH₃COONa</p>
+      </div>
+      <div class="card green-c">
+        <div class="card-title green">บัฟเฟอร์เบส (pH &gt; 7)</div>
+        <p>NH₃ / NH₄⁺<br>C₅H₅N / C₅H₅NH⁺</p>
+        <p style="margin-top:6px;font-size:12px;color:var(--green-dark)">ตัวอย่าง: NH₃/NH₄Cl</p>
+      </div>
+    </div>
+
+    <h4 class="subh">หลักการทำงาน (ระบบ CH₃COOH/CH₃COO⁻)</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
+      <div class="note">➕ เติม H⁺ (กรด):<br>CH₃COO⁻ + H⁺ → CH₃COOH<br><span style="font-size:12px">(เบสในบัฟเฟอร์ดูดซับ)</span></div>
+      <div class="note">➕ เติม OH⁻ (เบส):<br>CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O<br><span style="font-size:12px">(กรดในบัฟเฟอร์ทำปฏิกิริยา)</span></div>
+    </div>
+
+    <h4 class="subh">สมการ Henderson-Hasselbalch</h4>
+    <div class="formula">
+<strong>pH = pKa + log([A⁻]/[HA])</strong>     ← บัฟเฟอร์กรด
+<strong>pOH = pKb + log([BH⁺]/[B])</strong>    ← บัฟเฟอร์เบส
+ช่วงบัฟเฟอร์ทำงานได้:  pH = pKa ± 1   |   pOH = pKb ± 1
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่าง — บัฟเฟอร์กรด</div>
+      <div class="ex-step">
+CH₃COOH 0.30 M + CH₃COO⁻ 0.60 M  (Ka = 1.8×10⁻⁵)
+pH = −log(1.8×10⁻⁵) + log(0.60/0.30)
+   = 4.74 + log(2) = 4.74 + 0.30 = <strong>5.04</strong>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่าง — บัฟเฟอร์เบส</div>
+      <div class="ex-step">
+NH₃ 0.30 M / NH₄Cl 0.36 M  (Kb = 1.8×10⁻⁵)
+pOH = −log(1.8×10⁻⁵) + log(0.36/0.30) = 4.74 + 0.079 = 4.83
+pH = 14 − 4.83 = <strong>9.17</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1.6 Indicator -->
+  <div class="section" id="indicator">
+    <h3 class="sh"><span class="dot"></span>1.6 อินดิเคเตอร์ (Acid-Base Indicators)</h3>
+    <p>สารอินทรีย์ที่เปลี่ยนสีตาม pH ของสารละลาย ใช้ตรวจสอบกรด-เบส</p>
+    <div class="t-wrap">
+    <table>
+      <thead><tr><th>อินดิเคเตอร์</th><th>สีในกรด</th><th>สีในเบส</th><th>ช่วง pH เปลี่ยนสี</th></tr></thead>
+      <tbody>
+        <tr><td>กระดาษลิตมัส</td><td>แดง</td><td>น้ำเงิน</td><td>~7</td></tr>
+        <tr><td>ฟีนอล์ฟทาลีน</td><td>ไม่มีสี</td><td>ชมพู-แดง</td><td>8.2 – 10.0</td></tr>
+        <tr><td>เมทิลออเรนจ์</td><td>แดง</td><td>เหลือง</td><td>3.1 – 4.4</td></tr>
+        <tr><td>เมทิลเรด</td><td>แดง</td><td>เหลือง</td><td>4.2 – 6.3</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 1.7 Titration -->
+  <div class="section" id="titration">
+    <h3 class="sh"><span class="dot"></span>1.7 การไทเทรต (Acid-Base Titration)</h3>
+    <p>กระบวนการหาความเข้มข้นของกรด/เบสโดยให้ทำปฏิกิริยากันพอดี</p>
+    <ul style="font-size:13.5px;padding-left:20px;line-height:2">
+      <li><strong>จุดสมมูล (equivalent point)</strong> = กรด/เบสทำปฏิกิริยากันพอดี</li>
+      <li><strong>จุดยุติ (end point)</strong> = อินดิเคเตอร์เปลี่ยนสี (เลยจุดสมมูลเล็กน้อย)</li>
+    </ul>
+
+    <div class="t-wrap" style="margin-top:12px">
+    <table>
+      <thead><tr><th>ประเภทการไทเทรต</th><th>pH ที่จุดสมมูล</th><th>อินดิเคเตอร์ที่เหมาะ</th></tr></thead>
+      <tbody>
+        <tr><td>กรดแก่ + เบสแก่</td><td>= 7</td><td>เมทิลเรด, ฟีนอล์ฟทาลีน</td></tr>
+        <tr><td>กรดอ่อน + เบสแก่</td><td>&gt; 7</td><td>ฟีนอล์ฟทาลีน</td></tr>
+        <tr><td>กรดแก่ + เบสอ่อน</td><td>&lt; 7</td><td>เมทิลออเรนจ์</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="formula">
+สูตร:  n_กรด = n_เบส   →   C_กรด × V_กรด = C_เบส × V_เบส
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่าง — หาความเข้มข้นของ HCl</div>
+      <div class="ex-step">
+ไทเทรต HCl 25.00 mL ด้วย NaOH 0.10 M ใช้ไป 24.50 mL
+C_HCl = (0.10 × 24.50) / 25.00 = <strong>0.098 M</strong>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end part-body -->
+
+<!-- =================== PART 2: ไฟฟ้าเคมี =================== -->
+<div class="part-header green" id="electrochemistry">
+  <div class="icon">⚡</div>
+  <div>
+    <h2>ส่วนที่ 2: ไฟฟ้าเคมี</h2>
+    <p>Electrochemistry — ความสัมพันธ์ระหว่างปฏิกิริยาเคมีและพลังงานไฟฟ้า</p>
+  </div>
+</div>
+<div class="part-body">
+
+  <div class="section">
+    <h3 class="sh green-sh"><span class="dot" style="background:var(--green)"></span>2.1 ปฏิกิริยารีดอกซ์ (Redox Reaction)</h3>
+    <div class="card-grid">
+      <div class="card green-c">
+        <div class="card-title green">ออกซิเดชัน (Oxidation)</div>
+        <p>ให้อิเล็กตรอน (e⁻)<br>เลขออกซิเดชัน <strong>เพิ่มขึ้น</strong><br>= สารรีดิวซ์ (reducing agent)</p>
+      </div>
+      <div class="card blue-c">
+        <div class="card-title blue">รีดักชัน (Reduction)</div>
+        <p>รับอิเล็กตรอน (e⁻)<br>เลขออกซิเดชัน <strong>ลดลง</strong><br>= สารออกซิไดซ์ (oxidizing agent)</p>
+      </div>
+    </div>
+
+    <h4 class="subh">ตัวอย่าง: Zn + Cu²⁺</h4>
+    <div class="formula green-f">
+Zn(s) → Zn²⁺(aq) + 2e⁻        ← ออกซิเดชัน (Zn ให้ e⁻, เป็นแอโนด)
+Cu²⁺(aq) + 2e⁻ → Cu(s)        ← รีดักชัน (Cu²⁺ รับ e⁻, เป็นแคโทด)
+──────────────────────────────
+Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)   ← ปฏิกิริยารวม
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="sh green-sh"><span class="dot" style="background:var(--green)"></span>2.2 เซลล์กัลวานิก (Galvanic/Voltaic Cell)</h3>
+    <div class="t-wrap">
+    <table>
+      <thead class="green-h"><tr><th>ส่วนประกอบ</th><th>แอโนด (Anode, −)</th><th>แคโทด (Cathode, +)</th></tr></thead>
+      <tbody>
+        <tr><td>ปฏิกิริยา</td><td>ออกซิเดชัน</td><td>รีดักชัน</td></tr>
+        <tr><td>สารในเซลล์ Zn-Cu</td><td>Zn → Zn²⁺ + 2e⁻</td><td>Cu²⁺ + 2e⁻ → Cu</td></tr>
+        <tr><td>e⁻ ไหลจาก</td><td colspan="2">แอโนด → แคโทด (ผ่านสายไฟ)</td></tr>
+        <tr><td>ไอออนไหลผ่าน</td><td colspan="2">สะพานเกลือ (salt bridge)</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="formula green-f">
+E°cell = E°cathode − E°anode
+ตัวอย่าง Zn-Cu:  E°cell = 0.34 V − (−0.76 V) = <strong>1.10 V</strong>
+ปฏิกิริยาเกิดเองได้  ←→  E°cell เป็น <strong>บวก</strong>
+แผนภาพ: Zn(s) | Zn²⁺(aq) || Cu²⁺(aq) | Cu(s)
+(แอโนด|สารละลาย||สารละลาย|แคโทด)
+    </div>
+
+    <h4 class="subh">สมการเนิร์นส์ (Nernst Equation)</h4>
+    <div class="formula green-f">
+E = E° − (0.0591/n) × log Q     (ที่ 25°C)
+Q = [ไอออนแอโนด] / [ไอออนแคโทด]
+n = จำนวน e⁻ ที่ถ่ายโอน
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="sh green-sh"><span class="dot" style="background:var(--green)"></span>2.3 เซลล์แบตเตอรี่</h3>
+    <div class="t-wrap">
+    <table>
+      <thead class="green-h"><tr><th>ชนิด</th><th>เซลล์แห้ง (LeClanché)</th><th>แอลคาไลน์</th><th>ตะกั่ว (Lead Storage)</th></tr></thead>
+      <tbody>
+        <tr><td>แรงดัน</td><td>~1.5 V</td><td>~1.5 V</td><td>6 เซลล์ × 2 V = 12 V</td></tr>
+        <tr><td>แอโนด</td><td>Zn (กล่อง)</td><td>Zn + 2OH⁻ → ZnO + H₂O + 2e⁻</td><td>Pb + SO₄²⁻ → PbSO₄ + 2e⁻</td></tr>
+        <tr><td>แคโทด</td><td>แท่งคาร์บอน, MnO₂</td><td>MnO₂ + H₂O + 2e⁻ → Mn₂O₃ + 2OH⁻</td><td>PbO₂ + SO₄²⁻ + 4H⁺ + 2e⁻ → PbSO₄ + 2H₂O</td></tr>
+        <tr><td>อิเล็กโทรไลต์</td><td>NH₄Cl + ZnCl₂</td><td>KOH</td><td>H₂SO₄ เจือจาง</td></tr>
+        <tr><td>อัดไฟใหม่</td><td>ไม่ได้ (Primary)</td><td>ไม่ได้</td><td>ได้ (Secondary)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="sh green-sh"><span class="dot" style="background:var(--green)"></span>2.4 เซลล์อิเล็กโทรไลต์ & กฎฟาราเดย์</h3>
+    <div class="formula green-f">
+Q = I × t  (คูลอมบ์ = แอมแปร์ × วินาที)
+1 F = 96,500 C = ประจุ 1 โมลอิเล็กตรอน
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่าง — อิเล็กโทรไลซิส CaCl₂</div>
+      <div class="ex-step">
+ให้กระแส 0.642 A นาน 2.5 ชม. จะได้ Ca(l) กี่กรัม?
+Q = 0.642 × (2.5×3600) = 5,778 C
+Ca²⁺ + 2e⁻ → Ca  →  ต้องใช้ 2 F ต่อ 1 mol Ca
+mol Ca = 5,778 / (2 × 96,500) = 2.99×10⁻² mol
+มวล Ca = 2.99×10⁻² × 40.08 = <strong>1.20 g</strong>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- =================== PART 3: เคมีอินทรีย์ =================== -->
+<div class="part-header red" id="organic">
+  <div class="icon">🧬</div>
+  <div>
+    <h2>ส่วนที่ 3: เคมีอินทรีย์</h2>
+    <p>Organic Chemistry — สารประกอบที่มี C เป็นองค์ประกอบหลัก</p>
+  </div>
+</div>
+<div class="part-body">
+
+  <div class="section">
+    <h3 class="sh red-sh"><span class="dot" style="background:var(--red)"></span>3.1 ประเภทสารไฮโดรคาร์บอน</h3>
+
+    <div class="t-wrap">
+    <table>
+      <thead class="red-h"><tr><th>ประเภท</th><th>พันธะ</th><th>สูตรทั่วไป</th><th>ตัวอย่าง</th><th>ต่อท้าย</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Alkane</strong><br>แอลเคน</td>
+          <td>C−C เดี่ยว<br><em>อิ่มตัว</em></td>
+          <td>CₙH₂ₙ₊₂</td>
+          <td>CH₄ methane<br>C₂H₆ ethane<br>C₃H₈ propane</td>
+          <td>-ane</td>
+        </tr>
+        <tr>
+          <td><strong>Alkene</strong><br>แอลคีน</td>
+          <td>C=C คู่<br><em>ไม่อิ่มตัว</em></td>
+          <td>CₙH₂ₙ</td>
+          <td>C₂H₄ ethene<br>C₃H₆ propene</td>
+          <td>-ene</td>
+        </tr>
+        <tr>
+          <td><strong>Alkyne</strong><br>แอลไคน์</td>
+          <td>C≡C สาม<br><em>ไม่อิ่มตัว</em></td>
+          <td>CₙH₂ₙ₋₂</td>
+          <td>C₂H₂ ethyne<br>HC≡CH acetylene</td>
+          <td>-yne</td>
+        </tr>
+        <tr>
+          <td><strong>Benzene</strong><br>เบนซีน</td>
+          <td>วงอะโรมาติก<br>6 เหลี่ยม sp²</td>
+          <td>C₆H₆</td>
+          <td>C₆H₆ benzene<br>C₆H₅CH₃ toluene</td>
+          <td>benzene</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4 class="subh">การกลั่นลำดับส่วนของปิโตรเลียม (Fractional Distillation)</h4>
+    <div class="t-wrap">
+    <table style="font-size:12.5px">
+      <thead class="red-h"><tr><th>จำนวน C</th><th>ผลิตภัณฑ์</th><th>จุดเดือด (°C)</th><th>การใช้งาน</th></tr></thead>
+      <tbody>
+        <tr><td>C₁–C₄</td><td>แก๊สธรรมชาติ</td><td>&lt; 40</td><td>เชื้อเพลิงหุงต้ม, รถยนต์</td></tr>
+        <tr><td>C₅–C₁₀</td><td>น้ำมันเบนซิน</td><td>40–180</td><td>เชื้อเพลิงรถยนต์</td></tr>
+        <tr><td>C₁₁–C₁₂</td><td>น้ำมันก๊าด</td><td>180–250</td><td>เครื่องบิน</td></tr>
+        <tr><td>C₁₃–C₁₄</td><td>น้ำมันดีเซล</td><td>250–350</td><td>รถยนต์ดีเซล</td></tr>
+        <tr><td>C₁₅–C₁₇</td><td>น้ำมันเตา</td><td>250–350</td><td>โรงไฟฟ้า</td></tr>
+        <tr><td>C₂₆–C₃₈</td><td>ไขพาราฟิน</td><td>405–515</td><td>เทียนไข</td></tr>
+        <tr><td>C₃₈+</td><td>แอสฟัลต์</td><td>&gt; 505</td><td>ราดถนน</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="sh red-sh"><span class="dot" style="background:var(--red)"></span>3.2 หมู่ฟังก์ชัน (Functional Groups)</h3>
+
+    <div class="t-wrap">
+    <table>
+      <thead class="purple-h"><tr><th>หมู่ฟังก์ชัน</th><th>ชนิดสาร</th><th>สูตร</th><th>ตัวอย่าง</th><th>ต่อท้าย IUPAC</th></tr></thead>
+      <tbody>
+        <tr><td>−OH (hydroxyl)</td><td>แอลกอฮอล์</td><td>R−OH</td><td>CH₃OH methanol, C₂H₅OH ethanol</td><td>-ol</td></tr>
+        <tr><td>−CHO (aldehyde)</td><td>แอลดีไฮด์</td><td>R−CHO</td><td>HCHO formaldehyde, CH₃CHO acetaldehyde</td><td>-al</td></tr>
+        <tr><td>C=O (carbonyl)</td><td>คีโตน</td><td>R−CO−R'</td><td>CH₃COCH₃ acetone (propanone)</td><td>-one</td></tr>
+        <tr><td>−COOH (carboxyl)</td><td>กรดคาร์บอกซิลิก</td><td>R−COOH</td><td>CH₃COOH acetic acid, HCOOH formic acid</td><td>-oic acid</td></tr>
+        <tr><td>−COO− (ester)</td><td>เอสเตอร์</td><td>R−COO−R'</td><td>CH₃COOC₂H₅ ethyl acetate (กลิ่นผลไม้)</td><td>-yl ...oate</td></tr>
+        <tr><td>−O− (ether)</td><td>อีเทอร์</td><td>R−O−R'</td><td>CH₃OCH₃ dimethyl ether</td><td>oxy-</td></tr>
+        <tr><td>−NH₂ (amine)</td><td>เอมีน</td><td>R−NH₂</td><td>CH₃NH₂ methylamine</td><td>-amine</td></tr>
+        <tr><td>−X (X=F,Cl,Br,I)</td><td>แอลคิลเฮไลด์</td><td>R−X</td><td>CH₃Cl chloromethane, CH₂Cl₂ DCM</td><td>halo-</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="sh red-sh"><span class="dot" style="background:var(--red)"></span>3.3 การตั้งชื่อ IUPAC</h3>
+    <div class="formula orange-f">
+ชื่อสาร = prefix (หมู่แทนที่) + ชื่อโซ่หลัก (จำนวน C) + suffix (หมู่ฟังก์ชัน)
+    </div>
+
+    <div class="t-wrap">
+    <table style="font-size:12.5px">
+      <thead class="orange-h"><tr><th>จำนวน C</th><th>คำนำหน้า</th><th>จำนวน C</th><th>คำนำหน้า</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>meth-</td><td>6</td><td>hex-</td></tr>
+        <tr><td>2</td><td>eth-</td><td>7</td><td>hept-</td></tr>
+        <tr><td>3</td><td>prop-</td><td>8</td><td>oct-</td></tr>
+        <tr><td>4</td><td>but-</td><td>9</td><td>non-</td></tr>
+        <tr><td>5</td><td>pent-</td><td>10</td><td>dec-</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4 class="subh">หลักการตั้งชื่อ (4 ขั้นตอน)</h4>
+    <div style="font-size:13.5px;line-height:2;padding-left:4px">
+      <div><strong>1.</strong> เลือกสายโซ่ C ที่ยาวที่สุดเป็นโซ่หลัก</div>
+      <div><strong>2.</strong> กำหนดเลขตำแหน่ง C ให้หมู่ฟังก์ชันมีเลขน้อยที่สุด</div>
+      <div><strong>3.</strong> เติม suffix ตามหมู่ฟังก์ชัน</div>
+      <div><strong>4.</strong> ใส่ prefix (หมู่แทนที่) เรียงตามตัวอักษร A-B-C</div>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">✏️ ตัวอย่างการตั้งชื่อ</div>
+      <div class="ex-step">
+3-ethyl-2-methylhexane
+→ โซ่หลัก 6C = hex- | suffix alkane = -ane
+→ มี methyl ที่ C2 และ ethyl ที่ C3
+
+2-butanol  →  but(4C) + anol(alcohol) + OH ที่ C2
+3-hexanone  →  hex(6C) + anone(ketone) + C=O ที่ C3
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="sh red-sh"><span class="dot" style="background:var(--red)"></span>3.4 ไอโซเมอร์ (Isomerism)</h3>
+    <div class="note">💡 ไอโซเมอร์ = สูตรโมเลกุลเหมือนกัน แต่โครงสร้างต่างกัน → สมบัติต่างกัน</div>
+
+    <div class="t-wrap">
+    <table>
+      <thead class="red-h"><tr><th>ชนิด</th><th>คำอธิบาย</th><th>ตัวอย่าง</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Skeleton isomer</strong><br>(สายโซ่ C)</td>
+          <td>การจัดเรียงสายโซ่ C ต่างกัน</td>
+          <td>C₅H₁₂ มี 3 ไอโซเมอร์<br>n-pentane, isopentane, neopentane<br>C₆H₁₄ = 5 | C₇H₁₆ = 9</td>
+        </tr>
+        <tr>
+          <td><strong>Positional isomer</strong><br>(ตำแหน่งหมู่)</td>
+          <td>หมู่ฟังก์ชันอยู่คนละตำแหน่ง</td>
+          <td>1-butanol vs 2-butanol<br>(OH ที่ C1 กับ C2)</td>
+        </tr>
+        <tr>
+          <td><strong>Functional isomer</strong><br>(ชนิดหมู่)</td>
+          <td>หมู่ฟังก์ชันต่างกัน สูตรโมเลกุลเหมือน</td>
+          <td>C₂H₆O: ethanol vs dimethyl ether<br>C₃H₆O: propanal vs propanone</td>
+        </tr>
+        <tr>
+          <td><strong>Cis-trans isomer</strong><br>(เรขาคณิต)</td>
+          <td>หมู่อยู่ด้านเดียวกัน(cis)<br>หรือคนละด้าน(trans) ของ C=C</td>
+          <td>cis-2-butene: CH₃ ทั้งสองด้านเดียวกัน<br>trans-2-butene: CH₃ คนละด้าน</td>
+        </tr>
+        <tr>
+          <td><strong>Optical isomer</strong><br>(แสง)</td>
+          <td>ภาพสะท้อนกระจก ทับกันไม่ได้<br>(Chiral carbon = C*)</td>
+          <td>amino acids, sugars<br>C* ต่อกับหมู่ 4 ชนิดต่างกัน</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 3.5 Reactions -->
+  <div class="section" id="reactions">
+    <h3 class="sh red-sh"><span class="dot" style="background:var(--red)"></span>3.5 ปฏิกิริยาของสารไฮโดรคาร์บอน</h3>
+
+    <div class="rxn-grid">
+      <div class="rxn-card" style="border-color:#fca5a5;background:#fff5f5">
+        <div class="rxn-title" style="color:var(--red-dark)">
+          🔥 Combustion (การเผาไหม้)
+          <span class="badge" style="background:var(--red-light);color:var(--red-dark)">ทุกชนิด</span>
+        </div>
+        <p>CₓHᵧ + O₂ → CO₂ + H₂O</p>
+        <div class="formula orange-f">
+เขม่ามาก: Alkane &lt; Alkene &lt; Alkyne &lt; Benzene
+CH₄ + 2O₂ → CO₂ + 2H₂O
+        </div>
+      </div>
+
+      <div class="rxn-card" style="border-color:#93c5fd;background:#f0f7ff">
+        <div class="rxn-title" style="color:var(--blue-mid)">
+          🔄 Substitution (การแทนที่)
+          <span class="badge" style="background:var(--blue-light);color:var(--blue-mid)">อิ่มตัว</span>
+        </div>
+        <p>แทนที่ H ด้วยหมู่อื่น</p>
+        <div class="formula">
+Alkane + X₂ → RX + HX  (ต้องใช้แสง hv)
+Benzene + X₂ → ArX + HX  (ต้องมี FeX₃)
+CH₄ + Cl₂ →(hv)→ CH₃Cl + HCl
+        </div>
+      </div>
+
+      <div class="rxn-card" style="border-color:#a7f3d0;background:#f0fdf4">
+        <div class="rxn-title" style="color:var(--green-dark)">
+          ➕ Addition (การเติม)
+          <span class="badge" style="background:var(--green-light);color:var(--green-dark)">ไม่อิ่มตัว</span>
+        </div>
+        <p>เพิ่มอะตอมที่ C=C หรือ C≡C</p>
+        <div class="formula green-f">
+Halogenation: C=C + Br₂ → CBr-CBr
+(ฟอกสีโบรมีนน้ำตาล → ใส ทันที!)
+Hydrohalogenation: C=C + HX → C-C(X)
+Hydration: C=C + H₂O → alcohol
+        </div>
+      </div>
+
+      <div class="rxn-card" style="border-color:#d8b4fe;background:#faf5ff">
+        <div class="rxn-title" style="color:var(--purple)">
+          ➖ Elimination (การขจัด)
+          <span class="badge" style="background:var(--purple-light);color:var(--purple)">RX</span>
+        </div>
+        <p>ขจัด HX ออกจากโมเลกุล</p>
+        <div class="formula" style="background:var(--purple-light);border-left-color:var(--purple);color:var(--purple)">
+RX + KOH(alc) → Alkene + KBr + H₂O
+CH₃CH₂Br + KOH → CH₂=CH₂ + HBr
+ใช้ KOH ใน alcohol หรือ NaOEt/EtOH
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card" style="border-color:#fde68a;background:#fffbeb;margin-top:12px">
+      <div class="rxn-title" style="color:#92400e">
+        🟤 Oxidation (ออกซิเดชัน)
+        <span class="badge" style="background:#fef3c7;color:#92400e">Alkene / Alcohol</span>
+      </div>
+      <p>ใช้ KMnO₄ เป็นตัวออกซิไดซ์ (สีม่วงจาง = มี C=C)</p>
+      <div class="formula" style="background:#fefce8;border-left-color:#f59e0b;color:#78350f">
+KMnO₄ อ่อน + Alkene → diol (สีม่วงจาง)
+KMnO₄ แรง + Alkene → กรดคาร์บอกซิลิก
+ความว่องไว:  อิ่มตัว (Alkane) &lt;&lt;&lt; ไม่อิ่มตัว (Alkene, Alkyne)
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY TABLE -->
+<div style="background:white;border-radius:12px;border:1px solid var(--border);padding:28px;box-shadow:0 2px 8px rgba(0,0,0,0.05)">
+  <h2 style="font-size:18px;color:var(--blue-dark);margin-bottom:16px;display:flex;align-items:center;gap:8px">
+    📌 ตารางสรุปสูตรสำคัญ
+  </h2>
+  <div class="summary-grid">
+    <div class="sum-item">
+      <div class="sum-key">pH + pOH = 14</div>
+      <div class="sum-val">ที่ 25°C | Kw = [H⁺][OH⁻] = 10⁻¹⁴<br>กรด pH&lt;7 | กลาง pH=7 | เบส pH&gt;7</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">คำนวณ pH กรดอ่อน</div>
+      <div class="sum-val">ตาราง ICE + Ka = x²/C<br>→ x = [H⁺] → pH = −log[H⁺]</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">คำนวณ pH เบสอ่อน</div>
+      <div class="sum-val">Kb = x²/C → x = [OH⁻]<br>→ pOH → pH = 14 − pOH</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">Henderson-Hasselbalch</div>
+      <div class="sum-val">pH = pKa + log([A⁻]/[HA])<br>pOH = pKb + log([BH⁺]/[B])</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">เกลือ + น้ำ</div>
+      <div class="sum-val">แก่+แก่=กลาง | อ่อน+แก่=เบส<br>แก่+อ่อน=กรด | อ่อน+อ่อน=ขึ้นกับ Ka/Kb</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">E°cell ไฟฟ้าเคมี</div>
+      <div class="sum-val">E°cell = E°cathode − E°anode<br>เกิดเองได้ → E°cell เป็นบวก</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">กฎฟาราเดย์</div>
+      <div class="sum-val">Q = I × t | 1 F = 96,500 C<br>mol สาร = Q / (n × F)</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">ทดสอบโบรมีน</div>
+      <div class="sum-val">ไม่อิ่มตัว + Br₂(น้ำตาล) → ใส<br>= Addition เกิดทันที (เร็วมาก)</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">ปฏิกิริยาสารอินทรีย์</div>
+      <div class="sum-val">Alkane → Substitution (hv/FeX₃)<br>Alkene/Alkyne → Addition</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-key">ไอโซเมอร์</div>
+      <div class="sum-val">สูตรโมเลกุลเหมือน โครงสร้างต่าง<br>โครงสร้าง 3 ชนิด + สเตอริโอ 2 ชนิด</div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--text-muted);font-size:12px;margin-top:20px;padding-bottom:10px">
+  สรุปเนื้อหาวิชา 1102 104 เคมีทั่วไป · General Chemistry
+</div>
+
+</div><!-- .container -->
+</body>
+</html>
